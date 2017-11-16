@@ -1,0 +1,31 @@
+New classes are part of package java.time.*
+
+Old Date class -> it includes both date and time. No separate representation.
+	Year in Date class has offset 1900.
+	Month -> between 0 and 11. confusing...
+	not thread safe.
+	
+New Date & Time API :
+	
+	part of java.time package.
+	Based on ISO-8601
+	Mostly immutable classes - thread safe
+	No Public constructor - mostly static factory methods used...
+	
+Commonly used classes :
+
+LocalDate - a date in ISO-8601 standard. it doesn't have time information or timezone information.
+LocalTime - represents only time in ISO-8601 standard.
+LocalDateTime - both date and time. No timezone information.
+ZonedDateTime - both date and time and also timezone information. Similary Calendar class.
+Instant - analogous to Date class in old API.
+
+Also, two other classes : Duration and Period.
+
+Duration - between two time stamps 
+Period - between two dates.
+
+Format is like this :
+
+	[date]T[time][zoneoffset]
+	

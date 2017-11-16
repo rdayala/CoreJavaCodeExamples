@@ -1,0 +1,4 @@
+https://stackoverflow.com/questions/8777257/equals-vs-arrays-equals-in-java
+
+
+http://www.geeksforgeeks.org/java-util-arrays-equals-java-examples/

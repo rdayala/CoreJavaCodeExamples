@@ -1,0 +1,115 @@
+Performing multiple activities at around the same time.
+
+Examples:
+	Browsers displaying images in web pages
+	Websites displaying ads
+	Webcrawlers
+	Federated search - single site queries multiple sites and merges the results
+		metasearch engines
+		
+Certain tasks Block especially I/O operations. 
+Blocking halts other tasks thus wasting CPU time.
+
+Concurrent programming --> better resource utilization --> better throughput
+
+process --> is nothing but a running program.
+	process gets its own resources like memory, file handles, etc
+	
+Thread --> is within a process
+	part of process. 
+	A process can have multiple threads
+	thread shares process-wide resources like memory.
+	thread has its own program counter, stack, and local variables
+
+	2 types of threads
+		a. Daemon threads - background threads for tasks such as garbage collection.
+		b. Non-Daemon threads
+			created within application.
+			ex. main thread created by JVM to run main() method.
+In a Java program, there is always one thread, main thread.
+---------------------------------------------------------------------------
+java.lang.Thread(C) - represents Worker
+java.lang.Runnable(I) - represents Work/Task
+
+Launch a Thread:
+
+step 1: Create a Task/Work - nothing but create an instance of Runnable interface.
+
+	Runnable task = new MyRunnable();
+	
+	Runnable has a method run() which is where we write the code.
+
+step 2: Create a Thread/Worker give it a Task
+
+	Thread thread = new Thread(task); // thread will be in NEW state
+	
+step 3: Start Thread
+
+	thread.start(); // in state RUNNABLE
+	
+Thread Scheduler is responsible for moving thread from RUNNABLE state to RUNNING state and vise versa.
+
+sequence : 	RUNNABLE --> RUNNING  (in between there can be BLOCKED state)
+			RUNNING --> BLOCKED
+			BLOCKED --> RUNNABLE
+			RUNNABLE --> RUNNING
+			
+
+-----------------------------------------------------------------------------
+
+Race Condition :
+
+	Same object shared by multiple threads and that object has some state/data which can be modified by threads.
+	
+Object--> has mutable state --> shared by multiple threads --> not properly managed --> leads to race condition --> non thread safe code
+
+non thread safe object --> incorrect program --> data corruption.
+
+Synchronization : 
+
+	Protect critical (shared mutable) data.
+	
+	Sychronized block looks like this : 
+	
+		synchronized(lock) {
+			// shared state
+		}
+		
+	Synchronized method : lock will be on the object on which method is invoked.
+	
+		synchronized <method signature> {
+			// shared state
+		}
+		
+Locking :	Every object has a single lock. At most one thread can acquire an object's lock.
+Object lock can't be shared.
+ 
+	synchronized(this) {
+		// shared state
+	}
+	
+	Every object has a lock.
+	*** Locks are per object and not per  method.
+	*** If lock is unavailable to a thread, then it can't access any of object's synchronized methods.
+	However, no restriction on unsynchronized methods.
+	
+
+Every class has a lock. Static synchronized methods use Class level lock.
+
+Synchronize everywhere variable is accessed.
+Guard same shared mutable variable with same lock.
+
+volatile is a keyword used with variables.
+	- ensures memory visibility. the thread which is reading the value of this volatile variable, always gets latest value.
+	- volatile variables value always stored in main memory, not in registers or cache.
+	- used with shared mutable variables.
+	
+Locking(synchronization) can guarantee both visibility and mutual exclusion(atomicity), while volatile variables can only
+guarantee memory visibility.
+
+volatile is used :
+	- in scenarios where one thread writes and others read --> no race condition.
+
+synchronized keyword is used :
+	- in scenarios where race condition can occur. eg. check-then-act cases.
+

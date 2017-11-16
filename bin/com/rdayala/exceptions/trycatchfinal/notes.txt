@@ -1,0 +1,6 @@
+You have got something interesting about the try-catch-finally construct. To summary:
+
+1. Java Exception handling allows us to use try-catch, try-finally and try-catch-finally constructs.
+2. The finally block always gets executed regardless of exceptions thrown or not.
+3. The finally block is preferred to clean up resources such as closing files, network connections, database connections, etc.
+4. The finally block could not be reached if a System.exit(0) is encountered either in the try or catch block.

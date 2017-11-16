@@ -1,0 +1,42 @@
+Timezone map:
+https://upload.wikimedia.org/wikipedia/commons/8/88/World_Time_Zones_Map.png
+
+Fundamental concepts :
+
+As humans, we are trained to think date and time in terms of months, days, years, and hours so on...
+
+For computers, this kind of interpretation is not easy to represent.
+
+So, they modeled time as a single large number representing a point on a continuous timeline. Arbitrarily, epoch is set as an origin.
+
+epoch is set at - January 1, 1970 UTC(midnight).
+
+In computers, time is measured relative to epoch.
+
+A day has 86400 seconds. (24 hours * 60 mins * 60)
+
+UTC - short for coordinated Universal Time.
+International Time standard.
+
+UTC time is measured by atomic clocks which are highly precise. 
+There are around 70 UTC timing centers around the world and there is an organization called BIPM uses the times that are reported by
+these different timing centers to compute the exact UTC time.
+
+Computers have their own internal clocks to compute UTC time and they're good at reflecting UTC time.
+
+JVM implementations also do not handle leap seconds.
+
+Calendar systems :
+
+Solar
+	Gregorian - widely used.
+			Leap year divisible by 4 or 400, but not 100
+	Julian
+			Leap year exactly divisible by 4
+
+Lunar - followed by Islamic
+
+LuniSolar - Buddhist, Chinese, Hindu Lunisolar, Hebrew, etc.
+
+Java8 Date and time API uses ISO 8601 standard based on Gregorian calendar.
+

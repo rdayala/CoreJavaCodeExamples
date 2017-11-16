@@ -1,0 +1,21 @@
+Commonly used classes :
+
+java.util.Date ~ introduced in jdk1.0 and is now mostly deprecated. Encapsulates time information in addition to Date.
+
+	jdk1.1 onwards
+java.util.Calendar
+java.util.GregorianCalendar
+java.util.TimeZone
+
+
+Date class uses 1900 as the starting year. To represent 2016 - we have to use 116
+Month are numbered from 0 to 11. 
+Day is between 1 and 31.
+
+Calendar class also has some issues : month still starts from 0.
+They are not thread-safe.
+
+third party library for Date and times in Java : joda-time http://www.joda.org/joda-time/
+
+
+

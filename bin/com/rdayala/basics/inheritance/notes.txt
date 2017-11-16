@@ -1,0 +1,60 @@
+Constructors, SIB – Static Initialization Block and IIB – Instance Initialization Block of super class 
+will not be inheriting to its sub class. But they are executed while creating an object to sub class.
+
+Static members of super class are inheriting to sub class as static members and 
+non-static members are inheriting as non-static members only.
+
+By default, every class is a sub class of java.lang.Object class. 
+So, every class in java has properties inherited from Object class.
+
+Any class can not extend itself. It gives compiler error.
+
+We can call super class constructor explicitly through super() calling statement from 
+sub class constructor and we can call other constructors of the same class through this() 
+calling statement but, we can’t call sub class constructor from super class constructor.
+
+private : Private members can not be inherited to sub class.
+
+Default : Default members can be inherited to sub class within package.
+
+protected : protected members can be inherited to any sub class but usage of protected member is limited within package.
+
+public : public members are inherited to all sub classes.
+
+
+1) Single Inheritance : One class is extended by only one class.
+
+2) Multilevel Inheritance : One class is extended by a class and that class is 
+extended by another class thus forming chain of inheritance.
+
+3) Hierarchical Inheritance : One class is extended by many class.
+
+4) Hybrid Inheritance : It is a combination of above types of inheritance.
+
+There exist one more type of inheritance – Multiple Inheritance.
+
+5) Multiple Inheritance : One class extends more than one class.
+
+But, Multiple Inheritance is not supported in java. 
+To avoid the ambiguity, complexity and confusion, multiple inheritance is not supported in java.
+
+
+No, a class in java can not extend more than one classes or java does not support multiple inheritance. 
+To avoid ambiguity, complexity and confusion, java does not supports multiple inheritance. 
+For example, If Class C extends Class A and Class B which have a method with same name, 
+then Class C will have two methods with same name. This causes ambiguity and confusion for 
+which method to use. To avoid this, java does not supports multiple inheritance.
+
+Through interfaces, we can implement multiple inheritance in java. As classes in java can not 
+extend more than one classes, but a class can implement more than one interfaces.
+
+Constructors and initializers(Static initializers and instance initializers) are not inherited to sub classes. 
+But, they are executed while instantiating a sub class. 
+
+What happens if both, super class and sub class, have a field with same name.?
+Super class field will be hidden in the sub class. You can access hidden super class field in 
+sub class using super keyword.
+
+Only classes in java are inherited from Object class. Interfaces in java are not inherited 
+from Object class. But, classes which implement interfaces are inherited from Object class.
+

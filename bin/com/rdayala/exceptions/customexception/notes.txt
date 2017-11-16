@@ -1,0 +1,116 @@
+From my experience, most of the cases we need custom exceptions for 
+representing business exceptions which are, at a level higher than technical exceptions 
+defined by JDK. For example: InvalidAgeException, LowScoreException, TooManyStudentsException, etc
+
+**
+How to create a custom exception in action?? Here are the steps:
+
+1. Create a new class whose name should end with Exception like ClassNameException. 
+This is a convention to differentiate an exception class from regular ones.
+
+2. Make the class extends one of the exceptions which are subtypes of the java.lang.Exception class. 
+Generally, a custom exception class always extends directly from the Exception class.
+
+3. Create a constructor with a String parameter which is the detail message of the exception. 
+In this constructor, simply call the super constructor and pass the message.
+
+public class StudentNotFoundException extends Exception {
+ 
+    public StudentNotFoundException(String message) {
+        super(message);
+    }
+}
+
+And the following example shows the way a custom exception is used is nothing different than built-in exception:
+
+public class StudentManager {
+ 
+    public Student find(String studentID) throws StudentNotFoundException {
+        if (studentID.equals("123456")) {
+            return new Student();
+        } else {
+            throw new StudentNotFoundException(
+                "Could not find student with ID " + studentID);
+        }
+    }
+}
+
+And the following test program handles that exception:
+
+public class StudentTest {
+    public static void main(String[] args) {
+        StudentManager manager = new StudentManager();
+ 
+        try {
+ 
+            Student student = manager.find("0000001");
+ 
+        } catch (StudentNotFoundException ex) {
+            System.err.print(ex);
+        }
+    }
+}
+
+Run this program and you will see this output:
+
+StudentNotFoundException: Could not find student with ID 0000001
+
+
+******** Re-throwing an exception which is wrapped in a custom exception :
+
+Why is this needed?? 
+
+It’s a common practice for catching a built-in exception and re-throwing it via a custom exception. 
+To do so, let add a new constructor to our custom exception class. 
+This constructor takes two parameters: the detail message and the cause of the exception. 
+This constructor is implemented in the Exception class as following:
+
+      public Exception(String message, Throwable cause)
+
+Besides the detail message, this constructor takes a Throwable’s subclass which is the origin (cause) of the current exception.
+
+Example:
+
+For example, create the StudentStoreException class as following:
+
+public class StudentStoreException extends Exception {
+ 
+    public StudentStoreException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+
+And the following example shows where the StudentStoreException gets thrown:
+
+public void save(Student student) throws StudentStoreException {
+    try {
+        // execute SQL statements..
+    } catch (SQLException ex) {
+        throw new StudentStoreException("Failed to save student", ex);
+    }
+}
+
+Here, suppose that the save() method stores the specified student information into a database using JDBC. 
+The code can throw SQLException. We catch this exception and throw a new StudentStoreException which wraps the SQLException as its cause. 
+And it’s obvious that the save() method declares to throw StudentStoreException instead of SQLException.
+
+So what is the benefit of re-throwing exception like this?
+
+Why not leave the original exception to be thrown?
+
+Well, the main benefit of re-throwing exception by this manner is adding a higher abstraction layer for the exception handling, 
+which results in more meaningful and readable API. Do you see StudentStoreException is more meaningful than SQLException, don’t you?
+
+And the following code demonstrates handling the StudentStoreException above:
+
+StudentManager manager = new StudentManager();
+ 
+try {
+ 
+    manager.save(new Student());
+ 
+} catch (StudentStoreException ex) {
+    System.err.print(ex);
+}
+
+That’s about the lesson of writing custom exceptions in Java.
